@@ -71,6 +71,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
 
+    // IMU doesn't serve a purpose in three wheel odometry.
     private BNO055IMU imu;
     private VoltageSensor batteryVoltageSensor;
 
@@ -88,6 +89,7 @@ public class SampleMecanumDrive extends MecanumDrive {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
+        // IMU doesn't serve a purpose in three wheel odometry.
         // TODO: adjust the names of the following hardware devices to match your configuration
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -291,10 +293,11 @@ public class SampleMecanumDrive extends MecanumDrive {
         rightFront.setPower(v3);
     }
 
+
+    // IMU doesn't serve a purpose in three wheel odometry, it needs to be removed.
     @Override
-    public double getRawExternalHeading() {
-        return imu.getAngularOrientation().firstAngle;
-    }
+    public double getRawExternalHeading() { return imu.getAngularOrientation().firstAngle;}
+
 
     @Override
     public Double getExternalHeadingVelocity() {
