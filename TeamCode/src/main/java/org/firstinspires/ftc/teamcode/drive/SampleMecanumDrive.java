@@ -146,6 +146,8 @@ public class SampleMecanumDrive extends MecanumDrive {
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
 
+        setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
+
         trajectorySequenceRunner = new TrajectorySequenceRunner(follower, HEADING_PID);
     }
 
@@ -296,7 +298,8 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     // IMU doesn't serve a purpose in three wheel odometry, it needs to be removed.
     @Override
-    public double getRawExternalHeading() { return imu.getAngularOrientation().firstAngle;}
+    /*public double getRawExternalHeading() { return imu.getAngularOrientation().firstAngle;}*/
+    public double getRawExternalHeading() { return 0;}
 
 
     @Override
